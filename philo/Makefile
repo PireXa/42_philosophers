@@ -1,7 +1,7 @@
 # ************************************************************************** */
 #                                                                            */
 #                                                        :::      ::::::::   */
-#   MINISHELL                                          :+:      :+:    :+:   */
+#   PHILOSOPHERS                                       :+:      :+:    :+:   */
 #                                                    +:+ +:+         +:+     */
 #   By: rdas-nev <rdas-nev@student.42.fr>          +#+  +:+       +#+        */
 #                                                +#+#+#+#+#+   +#+           */
@@ -16,7 +16,7 @@ SRCS		=		main.c lists.c utils1.c timefuncs.c \
 
 OBJS 		=		$(addprefix objs/,$(SRCS:.c=.o))
 
-CFLAGS		=		-g #-Wall -Wextra -Werror -fsanitize=address
+CFLAGS		=		-g -Wall -Wextra -Werror -fsanitize=address
 RM			=		rm -f
 
 NAME		= 		philo

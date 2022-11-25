@@ -12,10 +12,10 @@
 
 #include "../inc/philo.h"
 
-int	sleeper(t_m *m, t_tt *t, t_philo *a, int s)
+int	sleeper(t_m *m, t_tt *t, t_philo *a, int *s)
 {
 	printf(P"%lld ms "C"%d is sleeping\n", gt(*t->s), t->i[0]);
-	while (gt(*t->s) - t->li[1] <= *m->sleep_t && s == 0)
+	while (gt(*t->s) - t->li[1] <= *m->sleep_t && *s == 0)
 	{
 		if (me_dead(*m->die_t, t->li[0], *t->s))
 		{
@@ -48,7 +48,7 @@ int	sleeper_2(t_m *m, t_tt *p, t_philo *a)
 	if (p->i[1] == 1 && *((t_m *)m)->morreu != 1)
 	{
 		p->li[1] = gt(*p->s);
-		if (sleeper((t_m *)m, p, a, *((t_m *)m)->morreu) == 1)
+		if (sleeper((t_m *)m, p, a, ((t_m *)m)->morreu) == 1)
 		{
 			*((t_m *)m)->morreu = 1;
 			return (1);

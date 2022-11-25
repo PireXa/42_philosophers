@@ -36,11 +36,14 @@ int	inputcheck(int ac, char **av)
 void	masterbuilder(t_m *m, char **av)
 {
 	m->mt1 = malloc(sizeof(pthread_mutex_t));
-	pthread_mutex_init(m->mt1, NULL);
+	if (pthread_mutex_init(m->mt1, NULL) != 0)
+		return ;
 	m->mt2 = malloc(sizeof(pthread_mutex_t));
-	pthread_mutex_init(m->mt2, NULL);
+	if (pthread_mutex_init(m->mt2, NULL) != 0)
+		return ;
 	m->mt3 = malloc(sizeof(pthread_mutex_t));
-	pthread_mutex_init(m->mt3, NULL);
+	if (pthread_mutex_init(m->mt3, NULL) != 0)
+		return ;
 	m->ph_n = malloc(sizeof(int));
 	*m->ph_n = ft_atoi(av[1]);
 	m->die_t = malloc(sizeof(int));
@@ -93,7 +96,10 @@ void	threaddoer(t_m *m, char **av)
 		philobuilder(m, i, av);
 	i = -1;
 	while (++i < ft_atoi(av[1]))
-		pthread_create(&m->th[i], NULL, f_thread, m);
+	{
+		if (pthread_create(&m->th[i], NULL, f_thread, m) != 0)
+			return ;
+	}
 	i = -1;
 	while (++i < ft_atoi(av[1]))
 		pthread_join(m->th[i], NULL);

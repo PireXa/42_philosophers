@@ -22,8 +22,7 @@
 // //////////////////
 // static int array
 // 0: thread init check
-// 1: death checker
-// 2: eat counter
+// 1: eat counter
 
 t_tt	*build_threadthings(t_tt *p, int n)
 {
@@ -46,7 +45,7 @@ void	*f_thread(void *m)
 	t_tt			*p;
 	t_philo			*a;
 
-	si = (int [3]){0, 0, 0};
+	si = (int [2]){0, 0};
 	init_thread(m);
 	a = (t_philo *)((t_m *) m)->b[si[0]];
 	p = (t_tt *)((t_m *) m)->t[si[0]++];
@@ -54,11 +53,11 @@ void	*f_thread(void *m)
 		;
 	p = build_threadthings(p, *a->phn);
 	while (*((t_m *)m)->morreu == 0 && (*a->ecnt == -1
-			|| si[2] < *a->ecnt * *((t_m *)m)->ph_n) && si[0] < 1000)
+			|| si[1] < *a->ecnt * *((t_m *)m)->ph_n) && si[0] < 1000)
 	{
 		if (!me_dead(*((t_m *)m)->die_t, p->li[0], *p->s))
 		{
-			si[2] += megacoiso(((t_m *)m), p, a);
+			si[1] += megacoiso(((t_m *)m), p, a);
 			if (sleeper_2((t_m *)m, p, a) == 1)
 				return (NULL);
 		}
