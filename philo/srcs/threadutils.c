@@ -49,7 +49,7 @@ void	forkaction(t_philo *a, long long int t, int i)
 		*a->e->q = 2;
 		printf("%s%lld ms %s%d has taken a fork\n", P, t, Y, -i);
 		*a->d->q = 2;
-		printf("%s%lld ms %s%d has taken a fork\n", P, t, Y,-i);
+		printf("%s%lld ms %s%d has taken a fork\n", P, t, Y, -i);
 		return ;
 	}
 	if (i > 0 && i < 1000)

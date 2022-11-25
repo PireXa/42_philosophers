@@ -69,7 +69,7 @@ typedef struct s_master
 	t_philo			**b;
 	pthread_t		th[124535];
 	t_tt			**t;
-	int 			*morreu;
+	int				*morreu;
 }						t_m;
 
 void			*f_thread(void *m);

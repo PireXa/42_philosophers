@@ -43,7 +43,7 @@ int	eater(t_m *m, t_tt *p, t_philo *a)
 	return (eat(a, ((t_m *)m), p, p->i));
 }
 
-int sleeper_2(t_m *m, t_tt *p, t_philo *a)
+int	sleeper_2(t_m *m, t_tt *p, t_philo *a)
 {
 	if (p->i[1] == 1 && *((t_m *)m)->morreu != 1)
 	{
@@ -51,7 +51,6 @@ int sleeper_2(t_m *m, t_tt *p, t_philo *a)
 		if (sleeper((t_m *)m, p, a, *((t_m *)m)->morreu) == 1)
 		{
 			*((t_m *)m)->morreu = 1;
-			printf("morreu\n");
 			return (1);
 		}
 		p->i[1] = 0;
@@ -61,15 +60,15 @@ int sleeper_2(t_m *m, t_tt *p, t_philo *a)
 
 int	megacoiso(t_m *m, t_tt *p, t_philo *a)
 {
-	//while (!me_dead(*m->die_t, p->li[0], *p->s) && ((t_m *)m)->morreu == 0) {
-		pthread_mutex_lock(((t_m *) m)->mt1);
-		if (*a->e->q == 1 && *a->d->q == 1 && *((t_m *) m)->ph_n != 1)
-			return (eater(((t_m *) m), p, a));
-		else if (*a->e->q == 1 && *a->d->q == 1 && *((t_m *) m)->ph_n == 1) {
-			unllock(a, ((t_m *) m), p);
-			return (0);
-		} else
-			pthread_mutex_unlock(((t_m *) m)->mt1);
-	//}
+	pthread_mutex_lock(((t_m *) m)->mt1);
+	if (*a->e->q == 1 && *a->d->q == 1 && *((t_m *) m)->ph_n != 1)
+		return (eater(((t_m *) m), p, a));
+	else if (*a->e->q == 1 && *a->d->q == 1 && *((t_m *) m)->ph_n == 1)
+	{
+		unllock(a, ((t_m *) m), p);
+		return (0);
+	}
+	else
+		pthread_mutex_unlock(((t_m *) m)->mt1);
 	return (0);
 }
