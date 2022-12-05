@@ -12,38 +12,26 @@
 
 #include "../inc/philo.h"
 
-void	ft_lstfront(t_lst **lst, t_lst *new)
+long long int	s_to_mil(struct timeval t)
 {
-	if (!lst || !new)
-		return ;
-	new->next = *lst;
-	*lst = new;
+	long long int	res;
+
+	res = t.tv_sec * 1000;
+	res += t.tv_usec / 1000;
+	return (res);
 }
 
-void	ft_lstadd_back(t_lst **lst, t_lst *new)
+long long int	gt(struct timeval start)
 {
-	t_lst	*tmp;
+	struct timeval	tv;
 
-	if (!*lst)
-	{
-		*lst = new;
-		return ;
-	}
-	tmp = *lst;
-	tmp->next = (*lst)->next;
-	while (tmp->next)
-		tmp = tmp->next;
-	tmp->next = new;
+	gettimeofday(&tv, NULL);
+	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000) - s_to_mil(start));
 }
 
-t_lst	*ft_lstnew(int *content)
+int	me_dead(int die_time, long long int eat_time, struct timeval start)
 {
-	t_lst	*new;
-
-	new = malloc(sizeof(t_lst));
-	if (!new)
-		return (NULL);
-	new->q = content;
-	new->next = NULL;
-	return (new);
+	if (gt(start) - eat_time >= die_time)
+		return (1);
+	return (0);
 }

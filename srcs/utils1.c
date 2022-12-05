@@ -1,25 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   PHILOSOPHERS                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fde-albe <fde-albe@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 4242/42/42 42:42:42 by fde-albe          #+#    #+#             */
+/*   Updated: 4242/42/42 42:42:42 by fde-albe         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/philo.h"
 
-void printlst(t_lst *lst)
-{
-	t_lst *tmp;
-
-	tmp = lst;
-	while (tmp)
-	{
-		printf("Item: %d ", *tmp->q);
-		tmp = tmp->next;
-	}
-	printf("\n");
-}
-
-t_lst *get_item(t_lst *lst, int index, int flag)
+t_lst	*get_item(t_lst *lst, int index, int flag)
 {
 	int		i;
 	t_lst	*tmp;
 
 	if (flag == 0)
-		return	NULL;
+		return (NULL);
 	i = 0;
 	tmp = lst;
 	while (i < index)
@@ -30,10 +29,10 @@ t_lst *get_item(t_lst *lst, int index, int flag)
 	return (tmp);
 }
 
-void buildlst(t_lst **lst, int size, int cnt)
+void	buildlst(t_lst **lst, int size, int cnt)
 {
-	int i;
-	int *content;
+	int	i;
+	int	*content;
 
 	i = 1;
 	content = malloc(sizeof(int));
@@ -49,17 +48,9 @@ void buildlst(t_lst **lst, int size, int cnt)
 	}
 }
 
-void	crono_thread(t_lst **forks)
+void	deletelist(t_lst **lst)
 {
-	pthread_t	*t1;
-
-	t1 = malloc(sizeof(pthread_t));
-	pthread_create(t1, NULL, fThread_Timer, (void *) forks);
-}
-
-void deletlist(t_lst **lst)
-{
-	t_lst *tmp;
+	t_lst	*tmp;
 
 	tmp = *lst;
 	while (tmp)
@@ -72,4 +63,31 @@ void deletlist(t_lst **lst)
 	free(lst);
 }
 
-//int eatcounter(char **args, )
+int	ft_atoi(const char *str)
+{
+	int	i;
+	int	res;
+
+	i = 0;
+	res = 0;
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		res = res * 10 + str[i] - '0';
+		i++;
+	}
+	return (res);
+}
+
+int	ft_isnumber(const char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] < '0' || str[i] > '9')
+			return (0);
+		i++;
+	}
+	return (1);
+}
